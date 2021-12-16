@@ -42,6 +42,7 @@ class PassCodeActivity : AppCompatActivity(), View.OnClickListener {
         tvTime.text = "${time.dayOfWeek.name} - ${time.dayOfMonth}/${time.month.value}/${time.year}"
         viewModel = ViewModelProvider(this)[PassCodeViewModel::class.java]
         onClickButton()
+        Log.d(TAG, "onCreate: PassCodeActivity create")
     }
     private fun onClickButton() {
         btn0.setOnClickListener(this)

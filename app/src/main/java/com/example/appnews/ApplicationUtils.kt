@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -23,11 +24,15 @@ class ApplicationUtils : Application(), Application.ActivityLifecycleCallbacks, 
         isPause = true
     }
 
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
+        isPause = false
+    }
+
     override fun onActivityResumed(activity: Activity) {
         if (isPause && activity !is PassCodeActivity) {
             val intent = Intent(this, PassCodeActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            activity.startActivity(intent)
             isPause = false
         }
     }
